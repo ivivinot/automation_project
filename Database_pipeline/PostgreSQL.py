@@ -94,7 +94,7 @@ class PostgresClient:
             identifiers = [sql.Identifier(col) for col in df.columns]
 
             # build the INSERT statement with placeholders for the VALUES block
-            template = sql.SQL("INSERT INTO {}.{} ({}) VALUES %s").format(
+            template = sql.SQL("INSERT INTO {}.{} ({}) VALUES %s ON CONFLICT DO NOTHING").format(
                 sql.Identifier(schema),
                 sql.Identifier(tbl),
                 sql.SQL(", ").join(identifiers)
